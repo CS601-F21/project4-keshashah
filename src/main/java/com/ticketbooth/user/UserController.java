@@ -1,5 +1,6 @@
 package com.ticketbooth.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,13 +12,16 @@ import java.util.List;
 @RequestMapping(path = "api/userprofile")
 public class UserController {
 
+    private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping
     public List<User> getUserProfile() {
-        return List.of(
-                new User("Kesha","ksshah4@usfca.edu",2, LocalDate.of(2020,06,11),"India"),
-                new User("Kesha2","ksshah4@usfca.edu",2, LocalDate.of(2020,06,11),"India"),
-                new User("Kesha3","ksshah4@usfca.edu",2, LocalDate.of(2020,06,11),"India")
-                );
+        return userService.getUserProfile();
     }
 
 }
