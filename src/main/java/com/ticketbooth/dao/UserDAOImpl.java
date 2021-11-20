@@ -16,27 +16,32 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int saveUser(User user) {
-        return 0;
+        return jdbcTemplate.update("INSERT INTO user(name, email, gender, dob, country) VALUES (?,?,?,?,?)",
+                new Object[] {user.getName(), user.getEmail(), user.getGender(), user.getDob(), user.getCountry()});
     }
 
     @Override
     public int updateUser(User user, int id) {
-        return 0;
+        return jdbcTemplate.update("UPDATE user SET name=?, gender=?, dob=?, country=? WHERE id=?",
+                new Object[]{user.getName(), user.getGender(), user.getDob(), user.getCountry(), id});
     }
 
     @Override
-    public int deleteUser(User user) {
-        return 0;
+    public int deleteUser(int id) {
+        return jdbcTemplate.update("DELETE FROM user WHERE id=?", id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("SELECT id, name, email, gender, dob, country FROM user", new BeanPropertyRowMapper<>(User.class));
+        return jdbcTemplate.query("SELECT id, name, email, gender, dob, country FROM user",
+                new BeanPropertyRowMapper<>(User.class));
     }
 
     @Override
     public User getUserById(int id) {
-        return null;
+        return jdbcTemplate.queryForObject("SELECT id, name, email, gender, dob, country FROM user WHERE id =?",
+                new BeanPropertyRowMapper<>(User.class),
+                id);
     }
 
 }
