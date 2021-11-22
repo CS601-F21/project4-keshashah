@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-//@SpringBootApplication()
+//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@SpringBootApplication()
 public class MainClass {
 
 	public static void main(String[] args) {

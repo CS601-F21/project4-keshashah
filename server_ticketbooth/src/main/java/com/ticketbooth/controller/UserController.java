@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserDAO userDAO;
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
         System.out.println("name is:"+ principal.getAttribute("name"));
         return Collections.singletonMap("name", principal.getAttribute("name"));
