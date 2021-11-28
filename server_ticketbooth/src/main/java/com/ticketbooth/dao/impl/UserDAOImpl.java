@@ -1,5 +1,6 @@
-package com.ticketbooth.dao;
+package com.ticketbooth.dao.impl;
 
+import com.ticketbooth.dao.UserDAO;
 import com.ticketbooth.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -33,13 +34,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("SELECT id, name, email, gender, dob, country FROM user",
+        return jdbcTemplate.query("SELECT userId, name, email, gender, dob, country FROM user",
                 new BeanPropertyRowMapper<>(User.class));
     }
 
     @Override
     public User getUserById(int id) {
-        return jdbcTemplate.queryForObject("SELECT id, name, email, gender, dob, country FROM user WHERE id =?",
+        return jdbcTemplate.queryForObject("SELECT userId, name, email, gender, dob, country FROM user WHERE userId =?",
                 new BeanPropertyRowMapper<>(User.class),
                 id);
     }

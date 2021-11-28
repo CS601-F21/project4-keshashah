@@ -4,19 +4,18 @@ import java.time.LocalDate;
 
 public class User {
 
-    private int id;
+    private int userId;
     private String name;
     private String email;
     private int gender; // 1 for male, 2 for female, 3 for others;
     private LocalDate dob;
     private String country;
-    //private AuthenticationProvider authenticationProvider;
 
     public User() {
     }
 
-    public User(int id, String name, String email, int gender, LocalDate dob, String country) {
-        this.id = id;
+    public User(int userId, String name, String email, int gender, LocalDate dob, String country) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.gender = gender;
@@ -33,12 +32,12 @@ public class User {
     }
 */
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -92,7 +91,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + userId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
