@@ -27,11 +27,8 @@ const LandingPage = () => {
 
 
 
-        <div className='landingpage'>
+        <div className='mainarea'>
             <Login />
-            {/* <div className='landingpage'>
-            Login page here
-            </div> */}
         </div>
       </div>
     );

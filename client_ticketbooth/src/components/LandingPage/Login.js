@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
@@ -41,12 +39,12 @@ const Login = () => {
   };
 
   const onLoginButtonClick = () => {
-    history.push('/UpcomingEvents');
+    history.push('/CreateEvent');
   };
 
   return (
     <div>
-        <div className="landingpage">
+        <div className="mainarea">
           <Grid className={classes.wrapper}>
             <h1>Login Page</h1>
             <TextField
