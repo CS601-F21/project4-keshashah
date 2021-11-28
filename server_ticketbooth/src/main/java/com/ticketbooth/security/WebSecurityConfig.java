@@ -1,4 +1,4 @@
-package com.ticketbooth.security;
+/*package com.ticketbooth.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,3 +16,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login();
     }
 }
+*/
