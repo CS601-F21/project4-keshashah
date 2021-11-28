@@ -4,18 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 
-//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@SpringBootApplication()
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+//@SpringBootApplication()
 public class MainClass {
 
 	public static void main(String[] args) {
 
 		SpringApplication.run(MainClass.class, args);
 
-	/*	try {
+		/*	try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/user021","user021","user021");
 			System.out.println("Kesha");
@@ -25,6 +23,12 @@ public class MainClass {
 		}catch(Exception e){
 			e.printStackTrace();
 		}*/
+
+		/* Call createTable if not exist */
+		/* 1. User */
+		/* 2. Event */
+		/* 3. Ticket */
+
 	}
 
 }
