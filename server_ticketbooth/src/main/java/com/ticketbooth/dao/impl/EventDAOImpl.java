@@ -1,6 +1,7 @@
 package com.ticketbooth.dao.impl;
 
 import com.ticketbooth.dao.EventDAO;
+import com.ticketbooth.dao.impl.util.SQLQueriesConstant;
 import com.ticketbooth.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -44,7 +45,7 @@ public class EventDAOImpl implements EventDAO {
                     "\nCould not parse the date and time for the event properly. " +
                     "\nPlease contact admin.";
         } else {
-            int rows = jdbcTemplate.update("INSERT INTO event (name, description, startTime, endTime, ownerId) VALUES (?,?,?,?,?)",
+            int rows = jdbcTemplate.update(SQLQueriesConstant.insertEvent,
                     new Object[]{event.getName(), event.getDescription(), startDatetime, endDatetime, event.getOwnerId()});
 
             return rows + " event successfully added.";
@@ -53,7 +54,7 @@ public class EventDAOImpl implements EventDAO {
 
     @Override
     public List<Event> getAllEvents() {
-        return jdbcTemplate.query("SELECT eventId, name, description, startTime, endTime FROM event",
+        return jdbcTemplate.query(SQLQueriesConstant.showEvents,
                 new BeanPropertyRowMapper<>(Event.class));
     }
 

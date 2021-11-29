@@ -7,20 +7,30 @@ public class Event {
     private String description;
     private String startTime;
     private String endTime;
+    private int ticketsSold;
     private int ownerId;
     private int isActive;
 
     public Event() {
     }
 
-    public Event(int eventId, String name, String description, String startTime, String endTime, int ownerId, int isActive) {
+    public Event(int eventId, String name, String description, String startTime, String endTime, int ticketsSold, int ownerId, int isActive) {
         this.eventId = eventId;
         this.name = name;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.ticketsSold = ticketsSold;
         this.ownerId = ownerId;
         this.isActive = isActive;
+    }
+
+    public int getTicketsSold() {
+        return ticketsSold;
+    }
+
+    public void setTicketsSold(int ticketsSold) {
+        this.ticketsSold = ticketsSold;
     }
 
     public int getEventId() {
