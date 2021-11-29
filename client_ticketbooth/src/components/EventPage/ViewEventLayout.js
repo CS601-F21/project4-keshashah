@@ -39,7 +39,7 @@ export default function ViewEventLayout(props) {
                             fullWidth
                             id="outlined-required"
                             label="Event Name:"
-                            defaultValue=""
+                            defaultValue={props.name}
                         />
                         
                         <TextField
@@ -48,7 +48,7 @@ export default function ViewEventLayout(props) {
                             rows={2}
                             id="outlined"
                             label="Event Description:"
-                            defaultValue=""
+                            defaultValue={props.description}
                         />
 
                         <DateTimePicker
@@ -75,6 +75,8 @@ export default function ViewEventLayout(props) {
 };
 ViewEventLayout.propTypes = {
     // ...prop type definitions here
-    columns: PropTypes.array,
-    rows: PropTypes.array,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    startTime: PropTypes.string,
+    endTime: PropTypes.string,
   };

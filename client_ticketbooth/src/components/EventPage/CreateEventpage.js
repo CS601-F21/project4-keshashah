@@ -19,7 +19,7 @@ const CreateEventPage = () => {
           
           <div className="topitems">
               <h1>Create New Event Page</h1>
-              <ViewEventLayout />
+              <ViewEventLayout name="" description=""  />
               <br/>
               <br/>
               <Button variant="contained"
