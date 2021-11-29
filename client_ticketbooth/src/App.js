@@ -3,6 +3,7 @@ import './App.css';
 import LandingPage from './components/LandingPage/Landingpage';
 import CreateEventPage from './components/EventPage/CreateEventpage';
 import AllEventsPage from './components/EventPage/AllEventsPage';
+import ShowEventDetails from './components/EventPage/ShowEventDetails';
 import { Route } from 'react-router-dom';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/CreateEvent" component={CreateEventPage} />
       <Route exact path="/AllEvents" component={AllEventsPage} />
+      <Route exact path="/Event/:id" component={ShowEventDetails} />
     </div>
   );
 }

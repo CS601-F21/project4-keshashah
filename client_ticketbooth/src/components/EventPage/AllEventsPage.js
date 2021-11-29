@@ -15,7 +15,7 @@ const columns = [
     },
   ];
   
-function AllEventsPage(props) {
+function AllEventsPage() {
     const eventDetails = useSelector((state) => state.event.events);
     const [rows, setRows] = useState([]);
     

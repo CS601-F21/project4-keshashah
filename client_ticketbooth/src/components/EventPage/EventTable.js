@@ -15,6 +15,10 @@ export default function EventTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const viewEvent = (row) => {
+    history.push('/Event/'+row.id);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -25,10 +29,6 @@ export default function EventTable(props) {
   };
 
   const history = useHistory();
-
-  const viewEvent = () => {
-    history.push('/');
-  };
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -68,7 +68,7 @@ export default function EventTable(props) {
                     })}
                     {<TableCell key={`edit-${row.id}`}>
                         <Button variant="contained"
-                            onClick={(e) => { viewEvent(e); }}>
+                            onClick={() => { viewEvent(row); }}>
                             View
                         </Button>
                     </TableCell>}

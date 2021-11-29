@@ -10,7 +10,7 @@ const CreateEventPage = () => {
     const history = useHistory();
 
     const onCreateEventButtonClick = () => {     
-        history.push('/');
+        history.push('/AllEvents');
       };
 
     return (
@@ -19,7 +19,7 @@ const CreateEventPage = () => {
           
           <div className="topitems">
               <h1>Create New Event Page</h1>
-              <ViewEventLayout name="" description=""  />
+              <ViewEventLayout name="" description="" />
               <br/>
               <br/>
               <Button variant="contained"

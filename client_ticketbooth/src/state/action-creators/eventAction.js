@@ -2,7 +2,8 @@
 import axios from 'axios';
 import server from '../../Config.js';
 import {
-  GET_ALL_EVENTS
+  GET_ALL_EVENTS,
+  GET_EVENT
  // import action types from here
 } from './types';
 
@@ -20,3 +21,19 @@ export const getAllEvents = () => async (dispatch) => {
         return false;
       });
   };
+
+ export const getEventById = (id) => async (dispatch) => {
+    axios.get(`${server}/api/event/${id}`)
+      .then((response) => {
+        dispatch({
+          type: GET_EVENT,
+          payload: response.data
+        })
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+};
+
