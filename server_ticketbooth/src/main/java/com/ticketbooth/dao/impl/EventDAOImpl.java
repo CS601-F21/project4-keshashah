@@ -3,6 +3,7 @@ package com.ticketbooth.dao.impl;
 import com.ticketbooth.dao.EventDAO;
 import com.ticketbooth.dao.impl.util.SQLQueriesConstant;
 import com.ticketbooth.model.Event;
+import com.ticketbooth.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,6 +57,13 @@ public class EventDAOImpl implements EventDAO {
     public List<Event> getAllEvents() {
         return jdbcTemplate.query(SQLQueriesConstant.showEvents,
                 new BeanPropertyRowMapper<>(Event.class));
+    }
+
+    @Override
+    public Event getEvent(int id) {
+        return jdbcTemplate.queryForObject(SQLQueriesConstant.showEventById,
+                new BeanPropertyRowMapper<>(Event.class),
+                id);
     }
 
 }

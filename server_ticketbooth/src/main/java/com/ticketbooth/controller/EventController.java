@@ -17,12 +17,18 @@ public class EventController {
     private EventDAO eventDAO;
 
     @PostMapping("/create")
-    public String saveUser(@RequestBody Event event) {
+    public String saveEvent(@RequestBody Event event) {
         return eventDAO.saveEvent(event) ;
     }
 
     @GetMapping("/all")
-    public List<Event> getAllUsers() {
+    public List<Event> getAllEvents() {
         return eventDAO.getAllEvents();
+    }
+
+    @GetMapping("/{id}")
+    public Event getEvent(@PathVariable("id") int id) {
+      //  System.out.println(id);
+        return eventDAO.getEvent(id);
     }
 }
