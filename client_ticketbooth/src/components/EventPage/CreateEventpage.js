@@ -1,6 +1,6 @@
 import React from 'react';
 import "./../style.css";
-import Appbar from '../NavBar/Appbar.js';
+import Appbar from '../Reusables/Appbar.js';
 import {TextField,Grid, Button} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
@@ -38,14 +38,12 @@ const CreateEventPage = () => {
       <div>
           <Appbar />
           
-          <div classname='topitems'>
-            <Grid style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column',  alignItems: 'center' }}> 
-                 <h1>Create New Event Page</h1>
-          
-                <div classname='contents'>
-                    
+          <div className="topitems">
+              <h1>Create New Event Page</h1>
+             <Grid style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column',  alignItems: 'center' }}>  
+                 
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <Stack spacing={3}>
+                    <Stack spacing={3}> 
 
                         <TextField
                             required
@@ -57,6 +55,8 @@ const CreateEventPage = () => {
                         
                         <TextField
                             fullWidth
+                            multiline 
+                            rows={2}
                             id="outlined"
                             label="Event Description:"
                             defaultValue=""
@@ -66,14 +66,14 @@ const CreateEventPage = () => {
                             label="Start Date&Time"
                             value={startvalue}
                             onChange={handleStartChange}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => <TextField fullWidth {...params} />}
                         />
 
                         <DateTimePicker
                             label="End Date&Time"
                             value={endvalue}
                             onChange={handleEndChange}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => <TextField  fullWidth {...params} />}
                         />
 
                         <Button variant="contained"
@@ -81,10 +81,9 @@ const CreateEventPage = () => {
                             Create
                         </Button>
 
-                     </Stack>
+                      </Stack> 
                     </LocalizationProvider>
-                </div>
-            </Grid>
+             </Grid> 
         </div>
 
       </div>
