@@ -3,7 +3,8 @@ import axios from 'axios';
 import server from '../../Config.js';
 import {
   GET_ALL_EVENTS,
-  GET_EVENT
+  GET_EVENT,
+  LOGOUT_SUCCESS
  // import action types from here
 } from './types';
 
@@ -35,5 +36,12 @@ export const getAllEvents = () => async (dispatch) => {
         alert(err);
         return false;
       });
-};
+  };
+
+  export const logout = (history) => async (dispatch) => {
+        dispatch({
+          type: LOGOUT_SUCCESS,
+        });
+        history.push('/');
+  };
 
