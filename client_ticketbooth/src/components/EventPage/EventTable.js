@@ -2,12 +2,14 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
+import { Button} from '@material-ui/core';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useHistory } from 'react-router-dom';
 
 export default function EventTable(props) {
   const [page, setPage] = React.useState(0);
@@ -20,6 +22,12 @@ export default function EventTable(props) {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const history = useHistory();
+
+  const viewEvent = () => {
+    history.push('/');
   };
 
   return (
@@ -37,6 +45,9 @@ export default function EventTable(props) {
                   {column.label}
                 </TableCell>
               ))}
+              <TableCell>
+                Details  
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -55,6 +66,12 @@ export default function EventTable(props) {
                         </TableCell>
                       );
                     })}
+                    {<TableCell key={`edit-${row.id}`}>
+                        <Button variant="contained"
+                            onClick={(e) => { viewEvent(e); }}>
+                            View
+                        </Button>
+                    </TableCell>}
                   </TableRow>
                 );
               })}

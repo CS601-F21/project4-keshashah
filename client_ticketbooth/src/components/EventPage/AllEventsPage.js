@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Appbar from '../Reusables/Appbar.js';
-import EventTable from '../Reusables/EventTable.js';
+import EventTable from './EventTable.js';
 import {getAllEvents} from '../../state/action-creators/eventAction.js';
 import "./../style.css";
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
+    { id: 'name', label: 'Name', minWidth: 100 },
     { id: 'description', label: 'Description', minWidth: 300 },
     { id: 'startTime', label: 'Start Time', minWidth: 170 },
     { id: 'endTime', label: 'End Time', minWidth: 170 },
