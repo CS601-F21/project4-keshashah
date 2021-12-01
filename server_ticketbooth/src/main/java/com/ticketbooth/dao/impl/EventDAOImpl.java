@@ -22,12 +22,11 @@ public class EventDAOImpl implements EventDAO {
     JdbcTemplate jdbcTemplate;
 
     private Date dateFormat(String inputdate) {
-        SimpleDateFormat inputdateformat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
+        SimpleDateFormat inputdateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
         SimpleDateFormat outputdateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         Date tempDate = null;
         try {
             tempDate = inputdateformat.parse(inputdate);
-            String newdate = outputdateformat.format(tempDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }

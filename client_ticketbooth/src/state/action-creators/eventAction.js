@@ -38,6 +38,20 @@ export const getAllEvents = () => async (dispatch) => {
       });
   };
 
+  export const createEvent = (newevent, history) => async (dispatch) => {
+    axios.post(`${server}/api/event/`, newevent)
+      .then((response) => {
+        alert(response.data);
+        history.push('/AllEvents');
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+  };
+
+
   export const logout = (history) => async (dispatch) => {
         dispatch({
           type: LOGOUT_SUCCESS,

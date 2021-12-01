@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   const onLoginButtonClick = () => {
-    history.push('/CreateEvent');
+    history.push('/AllEvents');
   };
 
   return (
