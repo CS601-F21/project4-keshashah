@@ -27,8 +27,7 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public Event getEvent(@PathVariable("id") int id) {
-      //  System.out.println(id);
+    public Event getEvent(@PathVariable int id) {
         return eventDAO.getEvent(id);
     }
 }

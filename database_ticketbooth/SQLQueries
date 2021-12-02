@@ -55,7 +55,7 @@ CREATE TABLE event (
 );
 
 INSERT INTO event (name, description, startTime, endTime, ownerId)
-VALUES ("Drama night", "An event for theatre drama", "2021-11-21 18:00:00", "2021-11-21 21:00:00", 2 );
+VALUES ("Drama night", "An event for theatre drama", "12/28/2021 12:56 pm", "12/28/2021 2:56 pm", 2 );
 
 
 INSERT INTO event (name, description, startTime, endTime, ownerId)
