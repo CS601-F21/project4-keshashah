@@ -52,6 +52,18 @@ export const getAllEvents = () => async (dispatch) => {
   };
 
 
+  export const purchaseTickets = (ticket) => async (dispatch) => {
+    axios.post(`${server}/api/ticket/`, ticket)
+      .then((response) => {
+        alert(response.data);
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+  };
+
   export const logout = (history) => async (dispatch) => {
         dispatch({
           type: LOGOUT_SUCCESS,

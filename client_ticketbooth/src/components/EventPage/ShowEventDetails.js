@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Appbar from '../Reusables/Appbar.js';
 import { useParams } from 'react-router-dom';
 import {getEventById} from '../../state/action-creators/eventAction.js';
-import {Button} from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core';
+import {purchaseTickets} from '../../state/action-creators/eventAction.js';
 
  function getDifferenceInDays(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
@@ -41,6 +42,18 @@ function ShowEventDetails() {
       dispatch(getEventById(id));
     }, [id]);
 
+    const [tickets, setTickets] = useState(1);
+
+    const onPurchaseButtonClick = () => {
+        const newtickets = {
+            userId: 1, //HARDCODED
+            eventId: id,
+            count: tickets
+          }
+        dispatch(purchaseTickets(newtickets));
+      };
+    
+    
     // const [eventid, setEventid] = React.useState(null);
     
 
@@ -65,13 +78,28 @@ function ShowEventDetails() {
                         <h4> {getDifferenceInSeconds(new Date(eventDetail.startTime),new Date())} second(s),</h4>
                         <br/>
                         <h1>{eventDetail.ticketsSold} tickets are already sold. </h1>
+                        <div>
+                        
+                            <TextField style = {{width:"20%"}}
+                                required
+                                id="outlined-required"
+                                label="Count:"
+                                type="number"
+                                InputProps={{
+                                    inputProps: { 
+                                        max: 10, min: 1
+                                    }
+                                }}
+                                value={tickets}
+                                onChange={(e) => setTickets(e.target.value)}
+                            />    
                         
                             <Button variant="contained"
-                                // onClick={() => { viewEvent(row); }}
-                            >
+                                    onClick={() => { onPurchaseButtonClick(); }}>
                                 PURCHASE NOW
                             </Button>
-                            </div>
+                        </div>
+                        </div>
                         
                     </div>
                     
