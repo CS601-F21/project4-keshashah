@@ -52,10 +52,11 @@ export const getAllEvents = () => async (dispatch) => {
   };
 
 
-  export const purchaseTickets = (ticket) => async (dispatch) => {
+  export const purchaseTickets = (ticket, history) => async (dispatch) => {
     axios.post(`${server}/api/ticket/`, ticket)
       .then((response) => {
         alert(response.data);
+        history.push('/api/event/{ticket.eventId}');
         return true;
       })
       .catch((err) => {

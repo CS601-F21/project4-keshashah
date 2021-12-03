@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import {getEventById} from '../../state/action-creators/eventAction.js';
 import {Button, TextField} from '@material-ui/core';
 import {purchaseTickets} from '../../state/action-creators/eventAction.js';
+import { useHistory } from 'react-router-dom';
 
  function getDifferenceInDays(date1, date2) {
     const diffInMs = Math.abs(date2 - date1);
@@ -35,6 +36,7 @@ function ShowEventDetails() {
     const eventDetail = useSelector((state) => state.event.eventbyid);
     
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const {id} = useParams()
 
@@ -50,7 +52,7 @@ function ShowEventDetails() {
             eventId: id,
             count: tickets
           }
-        dispatch(purchaseTickets(newtickets));
+        dispatch(purchaseTickets(newtickets,history));
       };
     
     

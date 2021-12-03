@@ -40,7 +40,7 @@ const CreateEventPage = () => {
           description,
           startTime:startvalue,
           endTime:endvalue,
-          ownerId: 1
+          ownerId: 1 //HARDCODED
         }
         dispatch(createEvent(newevent, history));
     };
