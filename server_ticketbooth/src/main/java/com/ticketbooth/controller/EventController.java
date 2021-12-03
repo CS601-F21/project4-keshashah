@@ -4,8 +4,10 @@ import com.ticketbooth.dao.EventDAO;
 import com.ticketbooth.model.Event;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -21,13 +23,28 @@ public class EventController {
         return eventDAO.saveEvent(event) ;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<Event> getAllEvents() {
-        return eventDAO.getAllEvents();
+        try {
+            return eventDAO.getAllEvents();
+        } catch (EmptyResultDataAccessException e) {
+                //LOGGER.debug("No record found in database for events");
+                return new ArrayList<>();
+        }
     }
 
     @GetMapping("/{id}")
-    public Event getEvent(@PathVariable int id) {
-        return eventDAO.getEvent(id);
+    public Event getEvent(@PathVariable int id){
+        try {
+            return eventDAO.getEvent(id);
+        } catch (EmptyResultDataAccessException e) {
+                //LOGGER.debug("No record found in database for event id "+id);
+                return null;
+            }
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable int id) {
+        return  eventDAO.deleteEvent(id) + " event successfully deleted";
     }
 }

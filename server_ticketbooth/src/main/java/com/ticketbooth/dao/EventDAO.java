@@ -7,4 +7,5 @@ public interface EventDAO {
     String saveEvent(Event event);
     List<Event> getAllEvents();
     Event getEvent(int id);
+    String deleteEvent(int id);
 }

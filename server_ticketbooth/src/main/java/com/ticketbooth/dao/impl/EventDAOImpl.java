@@ -34,6 +34,7 @@ public class EventDAOImpl implements EventDAO {
         return tempDate;
     }
 
+
     @Override
     public String saveEvent(Event event) {
 
@@ -63,6 +64,11 @@ public class EventDAOImpl implements EventDAO {
         return jdbcTemplate.queryForObject(SQLQueriesConstant.showEventById,
                 new BeanPropertyRowMapper<>(Event.class),
                 id);
+    }
+
+    @Override
+    public String deleteEvent(int id) {
+            return jdbcTemplate.update(SQLQueriesConstant.deleteEvent, id) + " event successfully deleted.";
     }
 
 }

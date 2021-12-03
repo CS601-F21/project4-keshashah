@@ -19,40 +19,19 @@ public class UserController {
     @Autowired
     private UserDAO userDAO;
 
-    /*@GetMapping("/user")
-    public Map<String, Object> getUser(@AuthenticationPrincipal OAuth2User principal) {
-        System.out.println("name is:"+ principal.getAttribute("name"));
-        return Collections.singletonMap("name", principal.getAttribute("name"));
-    }
-*/
-    @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
+    @GetMapping("/allUserEmails")
+    public List<String> getAllUsers() {
         return userDAO.getAllUsers();
     }
 
-    @GetMapping("/getUserById/{id}")
+    @PutMapping("/{id}")
+    public String updateUser(@RequestBody User user,@PathVariable int id) {
+        return userDAO.updateUser(user, id) + " user successfully updated";
+    }
+
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable int id) {
         return userDAO.getUserById(id);
     }
 
-    @GetMapping("/getUserByEmail/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return userDAO.getUserByEmail(email);
-    }
-
-
-    /*@PostMapping("/newUser")
-    public String saveUser(@RequestBody User user) {
-        return userDAO.saveUser(user) + " number of rows added to users";
-    }*/
-
-    @PutMapping("/updateUser/{id}")
-    public String updateUser(@RequestBody User user,@PathVariable int id) {
-        return userDAO.updateUser(user, id) + " number of rows updated to users";
-    }
-
-    /* @DeleteMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable int id) {
-        return  userDAO.deleteUser(id) + " number of rows deleted from users";
-    } */
 }
