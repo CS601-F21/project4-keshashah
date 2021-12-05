@@ -43,7 +43,7 @@ function AllEventsPage() {
         <div>
             <Appbar />
             <div className="topitems">
-                <h1>Upcoming Events</h1>
+                <h1>Showing All Events</h1>
                 <div className="contents">
                     <EventTable columns={columns} rows={rows}/>
                 </div>

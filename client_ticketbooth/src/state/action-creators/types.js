@@ -2,3 +2,7 @@ export const CREATE_EVENT = 'CREATE_EVENT';
 export const GET_EVENT = 'GET_EVENT';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const TOTAL_PURCHASED = 'TOTAL_PURCHASED';
+export const GET_PROFILE = 'GET_PROFILE';
+export const GET_ALL_EVENTS_BY_USER = 'GET_ALL_EVENTS_BY_USER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
