@@ -33,6 +33,16 @@ public class EventController {
         }
     }
 
+    @GetMapping("/user/{id}")
+    public List<Event> getAllEventsForUser(@PathVariable int id) {
+        try {
+            return eventDAO.getAllEventsByUser(id);
+        } catch (EmptyResultDataAccessException e) {
+            //LOGGER.debug("No record found in database for events");
+            return new ArrayList<>();
+        }
+    }
+
     @GetMapping("/{id}")
     public Event getEvent(@PathVariable int id){
         try {

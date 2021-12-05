@@ -8,4 +8,5 @@ public interface EventDAO {
     List<Event> getAllEvents();
     Event getEvent(int id);
     String deleteEvent(int id);
+    List<Event> getAllEventsByUser(int id);
 }

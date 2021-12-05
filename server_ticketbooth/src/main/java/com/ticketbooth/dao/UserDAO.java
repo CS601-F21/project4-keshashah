@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserDAO {
 
     int updateUser(User user, int id);
-    List<String> getAllUsers();
+    List<String> getAllUsersExcept(int id);
     User getUserById(int id);
 
 }

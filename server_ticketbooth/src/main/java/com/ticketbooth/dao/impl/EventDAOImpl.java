@@ -71,5 +71,12 @@ public class EventDAOImpl implements EventDAO {
             return jdbcTemplate.update(SQLQueriesConstant.deleteEvent, id) + " event successfully deleted.";
     }
 
+    @Override
+    public List<Event> getAllEventsByUser(int id) {
+        return jdbcTemplate.query(SQLQueriesConstant.showEventsForUser,
+                new BeanPropertyRowMapper<>(Event.class),
+                id);
+    }
+
 }
 

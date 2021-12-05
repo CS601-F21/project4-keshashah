@@ -23,9 +23,9 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<String> getAllUsers() {
-        return jdbcTemplate.query(SQLQueriesConstant.getAllUserEmails,
-                new BeanPropertyRowMapper<>(String.class));
+    public List<String> getAllUsersExcept(int id) {
+        return jdbcTemplate.queryForList(SQLQueriesConstant.getAllUserEmails,
+                String.class, id);
     }
 
     @Override

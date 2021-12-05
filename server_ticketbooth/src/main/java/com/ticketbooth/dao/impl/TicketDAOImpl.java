@@ -26,15 +26,10 @@ public class TicketDAOImpl implements TicketDAO {
 
     @Override
     public int getTicketCount(int eventId, int userId) {
-        try {
-            Ticket t= jdbcTemplate.queryForObject(SQLQueriesConstant.getTicketCount,
-                    new BeanPropertyRowMapper<>(Ticket.class),
-                    eventId, userId);
-            return t.getCount();
-        }
-        catch (EmptyResultDataAccessException e) {
-            return 0;
-        }
+        int count = jdbcTemplate.queryForObject(SQLQueriesConstant.getTicketCount,
+                                Integer.class, eventId, userId);
+        return count;
+
     }
 
     @Override

@@ -19,9 +19,9 @@ public class UserController {
     @Autowired
     private UserDAO userDAO;
 
-    @GetMapping("/allUserEmails")
-    public List<String> getAllUsers() {
-        return userDAO.getAllUsers();
+    @GetMapping("/allEmailsExcept/{id}")
+    public List<String> getAllUsersExcept(@PathVariable int id) {
+        return userDAO.getAllUsersExcept(id);
     }
 
     @PutMapping("/{id}")
