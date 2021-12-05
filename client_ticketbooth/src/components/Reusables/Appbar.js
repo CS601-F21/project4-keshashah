@@ -18,6 +18,7 @@ import {
   List,
  } from '@material-ui/core';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -44,13 +45,18 @@ import LogoutIcon from '@mui/icons-material/Logout';
 const menuItems = [
   {
       listIcon: <ConfirmationNumberIcon />,
-      listText: 'Upcoming Events',
-      listPath: '/UpcomingEvents'
+      listText: 'All Events',
+      listPath: '/AllEvents'
   },
+  {
+    listIcon: <AddIcon />,
+    listText: 'Create Event',
+    listPath: '/CreateEvent'
+},
   {
       listIcon: <PersonIcon />,
       listText: 'Profile',
-      listPath: '/profile'
+      listPath: '/Profile'
   },
   {
       listIcon: <LogoutIcon />,
