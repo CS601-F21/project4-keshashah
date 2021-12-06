@@ -11,9 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Repository
 public class EventDAOImpl implements EventDAO {
@@ -23,7 +21,7 @@ public class EventDAOImpl implements EventDAO {
 
     private Date dateFormat(String inputdate) {
         SimpleDateFormat inputdateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-        SimpleDateFormat outputdateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+       // SimpleDateFormat outputdateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
         Date tempDate = null;
         try {
             tempDate = inputdateformat.parse(inputdate);
@@ -76,6 +74,16 @@ public class EventDAOImpl implements EventDAO {
         return jdbcTemplate.query(SQLQueriesConstant.showEventsForUser,
                 new BeanPropertyRowMapper<>(Event.class),
                 id);
+    }
+
+    @Override
+    public List<Event> searchEvent(String key) {
+        //Map<String,Object> params = new HashMap<String,Object>();
+        //params.put("searchkey", "%"+key.toLowerCase()+"%");
+        String searchTerm = "%"+key.toLowerCase()+"%";
+        return jdbcTemplate.query(SQLQueriesConstant.searchEvents,
+                new BeanPropertyRowMapper<>(Event.class),
+                searchTerm,searchTerm);
     }
 
 }

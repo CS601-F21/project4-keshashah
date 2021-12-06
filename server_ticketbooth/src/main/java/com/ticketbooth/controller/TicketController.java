@@ -1,6 +1,6 @@
 package com.ticketbooth.controller;
 
-import com.ticketbooth.dao.impl.TicketDAOImpl;
+import com.ticketbooth.dao.TicketDAO;
 import com.ticketbooth.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.*;
 public class TicketController {
 
     @Autowired
-    TicketDAOImpl ticketDAOimpl;
+    TicketDAO ticketDAO;
 
     @GetMapping("/{eventId}/{userId}")
     public int getTicketCount(@PathVariable int eventId, @PathVariable int userId) {
-        return ticketDAOimpl.getTicketCount(eventId, userId);
+        return ticketDAO.getTicketCount(eventId, userId);
     }
 
     @PostMapping("/")
     public String purchaseTicket(@RequestBody Ticket ticket) {
-        return ticketDAOimpl.purchaseTicket(ticket);
+        return ticketDAO.purchaseTicket(ticket);
     }
 
-    @PostMapping("/{toUserId}")
-    public String transferTicket(@RequestBody Ticket ticket, @PathVariable int toUserId) {
-        return ticketDAOimpl.transferTicket(ticket, toUserId);
+    @PostMapping("/transfer/{toUserEmail}")
+    public String transferTicket(@RequestBody Ticket ticket, @PathVariable String toUserEmail ) {
+        return ticketDAO.transferTicket(ticket, toUserEmail);
     }
 }

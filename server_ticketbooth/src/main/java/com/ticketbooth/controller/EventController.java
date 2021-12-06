@@ -43,6 +43,16 @@ public class EventController {
         }
     }
 
+    @GetMapping("/search/{key}")
+    public List<Event> searchEvent(@PathVariable String key) {
+        try {
+            return eventDAO.searchEvent(key);
+        } catch (EmptyResultDataAccessException e) {
+            //LOGGER.debug("No record found in database for events");
+            return new ArrayList<>();
+        }
+    }
+
     @GetMapping("/{id}")
     public Event getEvent(@PathVariable int id){
         try {
@@ -54,7 +64,7 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id) {
+    public String deleteEvent(@PathVariable int id) {
         return  eventDAO.deleteEvent(id) + " event successfully deleted";
     }
 }

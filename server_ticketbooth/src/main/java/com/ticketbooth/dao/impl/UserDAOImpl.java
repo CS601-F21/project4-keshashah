@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -18,8 +19,14 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public int updateUser(User user, int id) {
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        //sdf.parse(user.getDob().toString())
+
         return jdbcTemplate.update(SQLQueriesConstant.updateUser,
-                new Object[]{user.getName(), user.getGender(), user.getDob(), user.getCountry(), id});
+                    new Object[]{user.getName(), user.getGender(), new Date(user.getDob()), user.getCountry(), id});
+
+
     }
 
     @Override

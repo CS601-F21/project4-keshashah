@@ -1,6 +1,10 @@
 package com.ticketbooth.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class User {
 
@@ -8,13 +12,13 @@ public class User {
     private String name;
     private String email;
     private int gender; // 1 for male, 2 for female, 3 for others;
-    private LocalDate dob;
+    private String dob;
     private String country;
 
     public User() {
     }
 
-    public User(int userId, String name, String email, int gender, LocalDate dob, String country) {
+    public User(int userId, String name, String email, int gender, String dob, String country) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -64,11 +68,11 @@ public class User {
         this.gender = gender;
     }
 
-    public LocalDate getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(LocalDate dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
