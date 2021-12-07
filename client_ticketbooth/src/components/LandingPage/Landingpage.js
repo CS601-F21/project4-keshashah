@@ -10,7 +10,7 @@ const LandingPage = () => {
     return (
       <div>
         <Box sx={{ flexGrow: 2 }}>
-        <AppBar position="static">
+        <AppBar position="static" style={{background: '#222'}}>
         <Toolbar>
         <Typography
             variant="h6"

@@ -67,7 +67,7 @@ function UpdateProfile(props) {
   const columns = [
     { id: 'name', label: 'Name', minWidth: 100 },
     { id: 'description', label: 'Description', minWidth: 300 },
-    { id: 'ticketsSold', label: 'Tickets Sold', minWidth: 100,
+    { id: 'ticketsSold', label: 'Tickets Bought', minWidth: 100,
       format: (value) => value.toLocaleString('en-US'),
     },
   ];
@@ -117,7 +117,7 @@ function UpdateProfile(props) {
 
   const handleUpdateProfile = () => {
     const userProfile = {
-      userName,
+      name: userName,
       dob,
       email,
       gender,
@@ -142,6 +142,7 @@ function UpdateProfile(props) {
               label="User Name"
               variant="outlined"
               placeholder="Full Name"
+              InputLabelProps={{ shrink: true }}  
               fullWidth
               required
               style={{marginBottom: '20px'}}
@@ -154,6 +155,7 @@ function UpdateProfile(props) {
               label="dateOfBirth"
               variant="outlined"
               placeholder="Date of birth in dd-mm-yyyy"
+              InputLabelProps={{ shrink: true }}  
               fullWidth
               required
               style={{marginBottom: '20px'}}
@@ -165,6 +167,7 @@ function UpdateProfile(props) {
             <TextField
               label="email"
               variant="outlined"
+              InputLabelProps={{ shrink: true }}  
               placeholder="Email"
               disabled
               fullWidth
@@ -181,8 +184,8 @@ function UpdateProfile(props) {
                     onChange={(e) => {handleOnChangeGender(e)}}
                     name="radio-buttons-group"
                 >
-                    <FormControlLabel value={0} control={<Radio />} label="Female" />
-                    <FormControlLabel value={1} control={<Radio />} label="Male" />
+                    <FormControlLabel value={0} control={<Radio />} label="Male" />
+                    <FormControlLabel value={1} control={<Radio />} label="Female" />
                     <FormControlLabel value={2} control={<Radio />} label="Other" />
                 </RadioGroup>
             </FormControl>
@@ -190,6 +193,7 @@ function UpdateProfile(props) {
               label="country"
               variant="outlined"
               placeholder="Country"
+              InputLabelProps={{ shrink: true }}  
               fullWidth
               required
               style={{marginBottom: '20px'}}

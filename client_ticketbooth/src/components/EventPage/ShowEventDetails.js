@@ -57,11 +57,11 @@ function ShowEventDetails() {
 
     useEffect(() => {
       dispatch(getEventById(id));
-      dispatch(getAllUsers());
     }, [id]);
 
     useEffect(() => {
         setAllUsersList(allUsers);
+        setToUser(allUsers[0]);
     }, [allUsers])
 
     useEffect(() => {
@@ -73,6 +73,7 @@ function ShowEventDetails() {
         setLoginData(logIn);
         if (logIn) {
           dispatch(getTotalPurchased(id, logIn.logInId));
+          dispatch(getAllUsers(logIn.logInId));
         }
     }, [logIn]);
 
@@ -97,16 +98,15 @@ function ShowEventDetails() {
             eventId: parseInt(id),
             count: parseInt(transfer),
           }
-          dispatch(transferTicket(id, loginData.logInId, 2, newtickets));
+          dispatch(transferTicket(id, loginData.logInId, toUser, newtickets));
     }
     
-
     return (
         <div>
             <Appbar />
             <div className="half">
                 <div className="halfleft">
-                    <div className="contents">
+                    <div className="contents" style={{paddingTop: "15%"}}>
                         <div>
                         <h1><u>{eventDetail.name}</u></h1>
                         <h5> ({eventDetail.description}) </h5>
@@ -117,39 +117,42 @@ function ShowEventDetails() {
                         <h4> {getDifferenceInSeconds(new Date(eventDetail.startTime),new Date())} second(s),</h4>
                         <br/>
                         <h1>{eventDetail.ticketsSold} tickets are already sold. </h1>
-                        <div>
-                        
-                            <TextField style = {{width:"20%"}}
-                                required
-                                id="outlined-required"
-                                label="Count:"
-                                type="number"
-                                InputProps={{
-                                    inputProps: { 
-                                        max: 10, min: 1
-                                    }
-                                }}
-                                value={tickets}
-                                onChange={(e) => setTickets(e.target.value)}
-                            />    
-                        
-                            <Button variant="contained" disabled={!isPurchase}
-                                    onClick={() => { onPurchaseButtonClick(); }}>
-                                PURCHASE NOW
-                            </Button>
-                        </div>
                         </div>
                         
                     </div>
                     
                 </div>
                 <div className="halfright">
-                    <div className="contents">
-                    <div className="half">
+                    <div className="contents" style={{paddingTop: "15%"}}>
+                    <div className="half" style={{flexDirection: 'column' }}>
+                        <h2 style={{textDecoration: 'underline'}}>Purchase new tickets</h2>
+                            <div style={{display: 'flex', marginBottom: '20px', width: '100%', justifyContent: 'space-around'}}>
+                                <TextField style = {{width:"20%"}}
+                                    required
+                                    id="outlined-required"
+                                    label="Count:"
+                                    type="number"
+                                    InputProps={{
+                                        inputProps: { 
+                                            max: 10, min: 1
+                                        }
+                                    }}
+                                    value={tickets}
+                                    onChange={(e) => setTickets(e.target.value)}
+                                />    
+                            
+                                <Button variant="contained" disabled={!isPurchase}
+                                        onClick={() => { onPurchaseButtonClick(); }}>
+                                    PURCHASE NOW
+                                </Button>
+                            </div>
+                        <h2 style={{textDecoration: 'underline'}}>Transfer My Tickets</h2>
+                        <div style={{display: 'flex', marginBottom: '20px', width: '100%'}}>
                              <TextField style = {{width:"20%"}}
                                 required
                                 id="outlined-required"
                                 label="Count:"
+                                fullWidth
                                 type="number"
                                 InputProps={{
                                     inputProps: { 
@@ -174,25 +177,29 @@ function ShowEventDetails() {
                                 >
                                     {allUsersList.map((item, index) => {
                                         return (
-                                            <MenuItem value={item.id}>{item.email}</MenuItem>
+                                            <MenuItem value={item}>{item}</MenuItem>
                                         )
                                     })}
-                            </TextField>  
-                            <Button variant="contained" disabled={totalTickets > 0 ? false : true}
-                                onClick={(e) => { onTransfer(e); }}
-                            >
-                                TRANSFER
-                            </Button>      
-                            <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
-                                onClick={() => { history.push('/EditEvent') }}
-                            >
-                                EDIT
-                            </Button>
-                            <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
-                                onClick={() => { dispatch(deleteEvent(parseInt(id), history)) }}
-                            >
-                                DELETE
-                            </Button>
+                                </TextField>  
+                                <Button variant="contained" disabled={(totalTickets > 0 && isPurchase) ? false : true}
+                                    onClick={(e) => { onTransfer(e); }}
+                                >
+                                    TRANSFER
+                                </Button>
+                            </div>
+                            <h2 style={{textDecoration: 'underline'}}>Modify the Event</h2>
+                            <div style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                                <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
+                                    onClick={() => { history.push('/EditEvent') }}
+                                >
+                                    EDIT
+                                </Button>
+                                <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
+                                    onClick={() => { dispatch(deleteEvent(parseInt(id), history)) }}
+                                >
+                                    DELETE
+                                </Button>
+                            </div> 
                         </div>
                     </div>
                 </div>

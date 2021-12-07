@@ -27,6 +27,21 @@ export const getAllEvents = () => async (dispatch) => {
       });
   };
 
+  export const searchedEvents = (searchedText) => async (dispatch) => {
+    axios.get(`${server}/api/event/search/${searchedText}`)
+      .then((response) => {
+        dispatch({
+          type: GET_ALL_EVENTS,
+          payload: response.data
+        })
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+  };
+
   export const getAllEventsForUser = (userId) => async (dispatch) => {
     axios.get(`${server}/api/event/user/${userId}`)
       .then((response) => {
@@ -42,8 +57,8 @@ export const getAllEvents = () => async (dispatch) => {
       });
   };
 
-  export const transferTicket = (eventId, fromUserdId, toUserId, ticket) => async (dispatch) => {
-    axios.post(`${server}/api/ticket/${toUserId}`, ticket)
+  export const transferTicket = (eventId, fromUserdId, toUserEmail, ticket) => async (dispatch) => {
+    axios.post(`${server}/api/ticket/transfer/${toUserEmail}`, ticket)
       .then((response) => {
         alert(response.data);
         dispatch(getTotalPurchased(eventId, fromUserdId))
@@ -87,6 +102,19 @@ export const getAllEvents = () => async (dispatch) => {
 
   export const createEvent = (newevent, history) => async (dispatch) => {
     axios.post(`${server}/api/event/`, newevent)
+      .then((response) => {
+        alert(response.data);
+        history.push('/AllEvents');
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+  };
+
+  export const editEvent = (newevent, history) => async (dispatch) => {
+    axios.put(`${server}/api/event/`, newevent)
       .then((response) => {
         alert(response.data);
         history.push('/AllEvents');
@@ -154,8 +182,8 @@ export const getAllEvents = () => async (dispatch) => {
       });
   };
 
-  export const getAllUsers = () => async (dispatch) => {
-    axios.get(`${server}/api/user/allEmails`)
+  export const getAllUsers = (userId) => async (dispatch) => {
+    axios.get(`${server}/api/user/allEmailsExcept/${userId}`)
       .then((response) => {
         dispatch({
           type: GET_ALL_USERS,

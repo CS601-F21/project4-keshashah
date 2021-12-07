@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
+import GoogleLogo from '../../images/google.svg';
+import logo from '../../images/ticket2.svg';
 import {
   Grid,
-  TextField,
+  Avatar,
   Button,
 } from '@material-ui/core';
 import './../style.css';
@@ -13,8 +14,8 @@ import './../style.css';
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     background: 'white',
-    padding: '20px',
-    margin: '10px',
+    // padding: '20px',
+    // margin: '10px',
     width: '40%',
     [theme.breakpoints.down('sm')]: {
       width: '95%',
@@ -44,41 +45,46 @@ const Login = () => {
 
   return (
     <div>
-        <div className="mainarea">
-          <Grid className={classes.wrapper}>
-            <h1>Login Page</h1>
-            <TextField
-              label='UserId'
-              variant="outlined"
-              fullWidth
-              required
-              value={userId}
-              onChange={(e) => {
-                handleOnChangeUserId(e);
-              }}
-              style={{margin:'20px auto', background:'white'}}
-            />
-            <TextField
-              label='Password'
-              variant="outlined"
-              placeholder='Enter password'
-              type='password'
-              fullWidth
-              required
-              value={password}
-              onChange={(e) => {
-                handleOnChangePassword(e);
-              }}
-              style={{margin:'20px auto', background:'white'}}
-            />
+        <div className="login">
+          
+            <Grid className={classes.wrapper}>
             
-            <Button variant="contained"
-                onClick={(e) => { onLoginButtonClick(e); }}>
-                  Login
-            </Button>
+            <h1>Easy SignIn/SignUp: </h1>
+         
+            <Button
+                  variant="outlined"
+                  fullWidth
+                  startIcon={(
+                    <img
+                      src={GoogleLogo}
+                      width="20px"
+                      style={{ position: 'absolute', left: 10, top: 7 }}
+                      alt="Google Logo"
+                    />
+                  )}
+                  onClick={(e) => { onLoginButtonClick(e); }}
+             >
+                  Sign in with Google
+                </Button>
 
-            {/* <a href="/Signup" className='loginAnchor'>New user? Register Here</a> */}
+                      <br/>      <br/>      <br/>      <br/>
+                      <p>
+                        <h2> <u>We Offer </u></h2>
+                <h3> Create and Market Your Event </h3>
+                <h3> Search for Other Events </h3>
+                <h3> Purchase Tickets for Upcoming Events </h3>
+                <h3> Transfer Tickets to Other Users </h3>
+          </p>
+                <Avatar style={{display: 'blue',
+                margin: '0 auto',
+                marginBottom: '4rem',
+                width: '50%',
+                height: '50%'
+                }} src={logo} alt='Kesha Shah' />
+                
+        
             </Grid>
+            
           </div>
     </div>
   );

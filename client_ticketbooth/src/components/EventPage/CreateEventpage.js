@@ -18,13 +18,13 @@ const CreateEventPage = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
-    const [startvalue, setStartValue] = React.useState(new Date(onemonthafter));
-    const [endvalue, setEndValue] = React.useState(new Date(onemonthafter.setHours(onemonthafter.getHours() +3)));
+    const [startvalue, setStartValue] = useState(new Date());
+    const [endvalue, setEndValue] = useState(new Date());
 
     const handleStartChange = (newValue) => {
       setStartValue(newValue);
-      const endValue = new Date(newValue);
-      setEndValue(endValue.setHours(endValue.getHours()+3));
+      // const endValue = new Date(newValue);
+      // setEndValue(endValue.setHours(endValue.getHours()+3));
     };
 
     const handleEndChange = (newValue) => {
@@ -38,8 +38,8 @@ const CreateEventPage = () => {
         const newevent = {
           name, 
           description,
-          startTime:startvalue,
-          endTime:endvalue,
+          startTime:startvalue.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}),
+          endTime:endvalue.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}),
           ownerId: 1 //HARDCODED
         }
         dispatch(createEvent(newevent, history));

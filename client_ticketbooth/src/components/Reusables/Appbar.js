@@ -21,6 +21,7 @@ import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import logo from '../../images/ticket.svg';
 
  const useStyles = makeStyles(theme=>({
   menuSliderContainer: {
@@ -84,7 +85,7 @@ const Appbar = () => {
         className={classes.menuSliderContainer}
         onClick={toggleSlider(slider, false)}
     >
-        <Avatar className={classes.avatar} alt='Kesha Shah' />
+        <Avatar className={classes.avatar} src={logo} alt='Kesha Shah' />
         <Divider />
         <List>
             {menuItems.map((listItem, key) => (
@@ -99,16 +100,17 @@ const Appbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{background: '#222', color: '#fff'}}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
+            onClick={toggleSlider('left', true)}
             sx={{ mr: 2 }}
           >
-            <MenuIcon onClick={toggleSlider('left', true)} />
+            <MenuIcon />
           </IconButton>
           <MobileeRightMenuSlider open={state.left}
                 onClose={toggleSlider('left', false)}
@@ -124,7 +126,7 @@ const Appbar = () => {
           >
             My TicketBooth Application
           </Typography>
-          {/* <img style={{cursor: 'pointer'}} width='120' height='80' alt='' onClick={() => {history.push('/');}}/> */}
+          <img style={{cursor: 'pointer'}} width='120' height='80' alt='' src={logo} onClick={() => {history.push('/');}}/>
         </Toolbar>
       </AppBar>
     </Box>

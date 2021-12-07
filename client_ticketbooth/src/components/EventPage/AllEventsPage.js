@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchBar from "material-ui-search-bar";
 import Appbar from '../Reusables/Appbar.js';
 import EventTable from './EventTable.js';
-import {getAllEvents} from '../../state/action-creators/eventAction.js';
+import {getAllEvents, searchedEvents} from '../../state/action-creators/eventAction.js';
 import "./../style.css";
 
 const columns = [
@@ -18,7 +19,7 @@ const columns = [
 function AllEventsPage() {
     const eventDetails = useSelector((state) => state.event.events);
     const [rows, setRows] = useState([]);
-    
+    const [searchText, setSearchText] = useState('')
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -43,7 +44,15 @@ function AllEventsPage() {
         <div>
             <Appbar />
             <div className="topitems">
-                <h1>Showing All Events</h1>
+                <SearchBar
+                style={{
+                  marginTop: '20px',
+                  marginBottom: '20px'}}
+                  value={searchText}
+                  onChange={(newValue) => setSearchText(newValue)}
+                  onRequestSearch={() => dispatch(searchedEvents(searchText))}
+                  onCancelSearch={() => dispatch(getAllEvents())}
+                />
                 <div className="contents">
                     <EventTable columns={columns} rows={rows}/>
                 </div>
