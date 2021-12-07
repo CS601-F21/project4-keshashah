@@ -19,9 +19,8 @@ public class EventDAOImpl implements EventDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private Date dateFormat(String inputdate) {
-        SimpleDateFormat inputdateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-       // SimpleDateFormat outputdateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+    private Date dateFormat(String inputdate, SimpleDateFormat inputdateformat) {
+
         Date tempDate = null;
         try {
             tempDate = inputdateformat.parse(inputdate);
@@ -36,8 +35,9 @@ public class EventDAOImpl implements EventDAO {
     @Override
     public String saveEvent(Event event) {
 
-        Date startDatetime = dateFormat(event.getStartTime());
-        Date endDatetime = dateFormat(event.getEndTime());
+        SimpleDateFormat inputdateformat = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a", Locale.ENGLISH);
+        Date startDatetime = dateFormat(event.getStartTime(), inputdateformat);
+        Date endDatetime = dateFormat(event.getEndTime(), inputdateformat);
 
         if(startDatetime == null || endDatetime == null) {
             return "Sorry, event not added. " +
@@ -59,14 +59,21 @@ public class EventDAOImpl implements EventDAO {
 
     @Override
     public Event getEvent(int id) {
-        return jdbcTemplate.queryForObject(SQLQueriesConstant.showEventById,
+        Event event =  jdbcTemplate.queryForObject(SQLQueriesConstant.showEventById,
                 new BeanPropertyRowMapper<>(Event.class),
                 id);
+        SimpleDateFormat inputdateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat targetFormat = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a", Locale.ENGLISH);
+
+        event.setStartTime(targetFormat.format(dateFormat(event.getStartTime(),inputdateformat )));
+        event.setEndTime(targetFormat.format(dateFormat(event.getEndTime(),inputdateformat )));
+
+        return event;
     }
 
     @Override
     public String deleteEvent(int id) {
-            return jdbcTemplate.update(SQLQueriesConstant.deleteEvent, id) + " event successfully deleted.";
+            return jdbcTemplate.update(SQLQueriesConstant.deleteEvent, id) + " event successfully deleted";
     }
 
     @Override
@@ -78,12 +85,28 @@ public class EventDAOImpl implements EventDAO {
 
     @Override
     public List<Event> searchEvent(String key) {
-        //Map<String,Object> params = new HashMap<String,Object>();
-        //params.put("searchkey", "%"+key.toLowerCase()+"%");
         String searchTerm = "%"+key.toLowerCase()+"%";
         return jdbcTemplate.query(SQLQueriesConstant.searchEvents,
                 new BeanPropertyRowMapper<>(Event.class),
                 searchTerm,searchTerm);
+    }
+
+    @Override
+    public String updateEvent(Event event) {
+        SimpleDateFormat inputdateformat = new SimpleDateFormat("MM/dd/yyyy, hh:mm:ss a", Locale.ENGLISH);
+        Date startDatetime = dateFormat(event.getStartTime(), inputdateformat);
+        Date endDatetime = dateFormat(event.getEndTime(), inputdateformat);
+
+        if(startDatetime == null || endDatetime == null) {
+            return "Sorry, event not updated. " +
+                    "\nCould not parse the date and time for the event properly. " +
+                    "\nPlease contact admin.";
+        } else {
+            int rows = jdbcTemplate.update(SQLQueriesConstant.updateEvent,
+                    new Object[]{event.getName(), event.getDescription(), startDatetime, endDatetime, event.getEventId()});
+
+            return rows + " event updated successfully.";
+        }
     }
 
 }

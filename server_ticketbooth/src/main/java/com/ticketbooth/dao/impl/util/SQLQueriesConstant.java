@@ -14,4 +14,5 @@ public class SQLQueriesConstant {
     public static String showEventsForUser = showEventsBase + " AND ticket.userId=? GROUP BY event.eventID";
     public static String getUserIdFromEmail = "SELECT userId FROM user WHERE email = ? ";
     public static String searchEvents = showEventsBase + " AND (LOWER(name) LIKE ? OR LOWER(description) LIKE ? ) GROUP BY event.eventID" ;
+    public static String updateEvent= "UPDATE event SET name=?, description=?, startTime=?, endTime=? WHERE eventId=?";
 }

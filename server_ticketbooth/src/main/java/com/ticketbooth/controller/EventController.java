@@ -23,6 +23,11 @@ public class EventController {
         return eventDAO.saveEvent(event) ;
     }
 
+    @PutMapping("/")
+    public String updateEvent(@RequestBody Event event) {
+        return eventDAO.updateEvent(event);
+    }
+
     @GetMapping("/")
     public List<Event> getAllEvents() {
         try {
@@ -33,10 +38,10 @@ public class EventController {
         }
     }
 
-    @GetMapping("/user/{id}")
-    public List<Event> getAllEventsForUser(@PathVariable int id) {
+    @GetMapping("/user/{userid}")
+    public List<Event> getAllEventsForUser(@PathVariable int userid) {
         try {
-            return eventDAO.getAllEventsByUser(id);
+            return eventDAO.getAllEventsByUser(userid);
         } catch (EmptyResultDataAccessException e) {
             //LOGGER.debug("No record found in database for events");
             return new ArrayList<>();
@@ -65,6 +70,6 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     public String deleteEvent(@PathVariable int id) {
-        return  eventDAO.deleteEvent(id) + " event successfully deleted";
+        return  eventDAO.deleteEvent(id);
     }
 }

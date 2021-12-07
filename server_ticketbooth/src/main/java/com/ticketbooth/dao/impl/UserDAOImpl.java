@@ -23,10 +23,13 @@ public class UserDAOImpl implements UserDAO {
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         //sdf.parse(user.getDob().toString())
 
+//        System.out.println("Name:"+user.getName());
+//        System.out.println("Gender:"+user.getGender());
+//        System.out.println("DOb:"+user.getDob());
+//        System.out.println("Country:"+user.getCountry());
+//        System.out.println("Id:"+id);
         return jdbcTemplate.update(SQLQueriesConstant.updateUser,
-                    new Object[]{user.getName(), user.getGender(), new Date(user.getDob()), user.getCountry(), id});
-
-
+                    new Object[]{user.getName(), user.getGender(), user.getDob(), user.getCountry(), id});
     }
 
     @Override
