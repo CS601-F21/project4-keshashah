@@ -3,7 +3,7 @@ package com.ticketbooth.dao.impl.util;
 public class SQLQueriesConstant {
     public static final String insertEvent = "INSERT INTO event (name, description, startTime, endTime, ownerId, isActive) VALUES (?,?,?,?,?,1)";
     public static final String showEventsBase = "SELECT event.eventId as eventId, name, description, startTime, endTime, ownerId, COALESCE(SUM(ticket.count),0) as ticketsSold FROM event LEFT OUTER JOIN ticket ON event.eventID = ticket.eventID WHERE event.isActive=1 ";
-    public static final String showEvents = showEventsBase + " GROUP BY eventID";
+    public static final String showEvents = showEventsBase + " GROUP BY eventID LIMIT ? OFFSET ?";
     public static String showEventById = showEventsBase +" AND event.eventId=? GROUP BY eventID";
     public static String getTicketCount = "SELECT COALESCE(sum(count), 0) AS count FROM ticket WHERE eventId=? and userId =? ;";
     public static String insertTicket = "INSERT INTO ticket(userId, eventId, count) VALUES(?,?,?)";

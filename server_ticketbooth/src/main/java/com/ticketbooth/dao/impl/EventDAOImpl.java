@@ -3,8 +3,10 @@ package com.ticketbooth.dao.impl;
 import com.ticketbooth.dao.EventDAO;
 import com.ticketbooth.dao.impl.util.SQLQueriesConstant;
 import com.ticketbooth.model.Event;
-import com.ticketbooth.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -52,9 +54,10 @@ public class EventDAOImpl implements EventDAO {
     }
 
     @Override
-    public List<Event> getAllEvents() {
+    public List<Event> getAllEvents(Integer pageNo, Integer pageSize) {
         return jdbcTemplate.query(SQLQueriesConstant.showEvents,
-                new BeanPropertyRowMapper<>(Event.class));
+                new BeanPropertyRowMapper<>(Event.class), pageSize, pageSize*(pageNo-1)) ;
+
     }
 
     @Override

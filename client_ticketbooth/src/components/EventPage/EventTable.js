@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 
 export default function EventTable(props) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(7);
 
   const viewEvent = (row) => {
     history.push('/Event/'+row.id);
@@ -79,7 +79,7 @@ export default function EventTable(props) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 15, 25, 50, 100]}
+        rowsPerPageOptions={[5, 7, 10, 15]}
         component="div"
         count={props.rows.length}
         rowsPerPage={rowsPerPage}

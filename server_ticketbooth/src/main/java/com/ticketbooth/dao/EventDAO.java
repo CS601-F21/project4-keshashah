@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface EventDAO {
     String saveEvent(Event event);
-    List<Event> getAllEvents();
+    List<Event> getAllEvents(Integer pageNo, Integer pageSize);
     Event getEvent(int id);
     String deleteEvent(int id);
     List<Event> getAllEventsByUser(int id);

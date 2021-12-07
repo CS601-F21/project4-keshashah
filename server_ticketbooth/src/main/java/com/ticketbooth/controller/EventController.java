@@ -29,9 +29,10 @@ public class EventController {
     }
 
     @GetMapping("/")
-    public List<Event> getAllEvents() {
+    public List<Event> getAllEvents(@RequestParam(defaultValue = "1") Integer pageNo,
+                                    @RequestParam(defaultValue = "100") Integer pageSize) {
         try {
-            return eventDAO.getAllEvents();
+            return eventDAO.getAllEvents(pageNo, pageSize);
         } catch (EmptyResultDataAccessException e) {
                 //LOGGER.debug("No record found in database for events");
                 return new ArrayList<>();
