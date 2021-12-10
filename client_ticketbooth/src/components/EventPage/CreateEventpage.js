@@ -5,7 +5,7 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {TextField,Grid} from '@material-ui/core';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {Button} from '@material-ui/core';
 import {createEvent} from '../../state/action-creators/eventAction.js';
@@ -15,6 +15,8 @@ const CreateEventPage = () => {
   const onemonthafter = new Date();
     onemonthafter.setDate(onemonthafter.getDate() + 30);
     
+    const loginid = useSelector((state) => state.event.loginid);
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
@@ -40,7 +42,7 @@ const CreateEventPage = () => {
           description,
           startTime:startvalue.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}),
           endTime:endvalue.toLocaleString("en-US", {timeZone: "America/Los_Angeles"}),
-          ownerId: 1 //HARDCODED
+          ownerId: loginid
         }
         dispatch(createEvent(newevent, history));
     };

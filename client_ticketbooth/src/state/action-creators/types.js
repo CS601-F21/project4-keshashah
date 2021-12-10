@@ -6,3 +6,4 @@ export const TOTAL_PURCHASED = 'TOTAL_PURCHASED';
 export const GET_PROFILE = 'GET_PROFILE';
 export const GET_ALL_EVENTS_BY_USER = 'GET_ALL_EVENTS_BY_USER';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const LOGIN_USER = 'LOGIN_USER';
