@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import GoogleLogo from '../../images/google.svg';
 import logo from '../../images/ticket2.svg';
@@ -9,6 +10,7 @@ import {
   Button,
 } from '@material-ui/core';
 import './../style.css';
+import {loginUser} from '../../state/action-creators/eventAction.js';
 
 // CSS styles
 const useStyles = makeStyles((theme) => ({
@@ -23,34 +25,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 const Login = () => {
   const classes = useStyles();
 
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
-
   const history = useHistory();
   
-  const handleOnChangeUserId = (event) => {
-    setUserId(event.target.value);
-  };
-
-  const handleOnChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  const dispatch = useDispatch();
 
   const onLoginButtonClick = () => {
-    history.push('/AllEvents');
+    dispatch(loginUser(history));
+   // history.push('/AllEvents');
   };
 
+  
   return (
     <div>
         <div className="login">
           
+           
             <Grid className={classes.wrapper}>
             
             <h1>Easy SignIn/SignUp: </h1>
-         
+
             <Button
                   variant="outlined"
                   fullWidth
@@ -66,15 +63,15 @@ const Login = () => {
              >
                   Sign in with Google
                 </Button>
-
-                      <br/>      <br/>      <br/>      <br/>
-                      <p>
-                        <h2> <u>We Offer </u></h2>
+               
+                <br/>      <br/>      <br/>      <br/>
+                      
+                <h2> <u>We Offer </u></h2>
                 <h3> Create and Market Your Event </h3>
                 <h3> Search for Other Events </h3>
                 <h3> Purchase Tickets for Upcoming Events </h3>
                 <h3> Transfer Tickets to Other Users </h3>
-          </p>
+                
                 <Avatar style={{display: 'blue',
                 margin: '0 auto',
                 marginBottom: '4rem',
@@ -84,7 +81,9 @@ const Login = () => {
                 
         
             </Grid>
-            
+          
+      
+
           </div>
     </div>
   );

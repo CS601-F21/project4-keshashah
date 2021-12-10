@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
    
 function ShowEventDetails() {
     const eventDetail = useSelector((state) => state.event.eventbyid);
-    const logIn = useSelector((state) => state.event.login);
+    const loginid = useSelector((state) => state.event.loginid);
     const totalPurchased = useSelector((state) => state.event.totalPurchased);
     const allUsers = useSelector((state) => state.event.allUsers);
     const dispatch = useDispatch();
@@ -18,7 +18,6 @@ function ShowEventDetails() {
     const {id} = useParams();
     const [isPurchase, setIsPurchase] = useState(true);
     const [eventData, setEventData] = useState(eventDetail);
-    const [loginData, setLoginData] = useState(logIn);
     const [totalTickets, setTotalTickets] = useState(totalPurchased);
     const [allUsersList, setAllUsersList] = useState([]);
     const [toUser, setToUser] = useState();
@@ -61,7 +60,7 @@ function ShowEventDetails() {
 
     useEffect(() => {
         setAllUsersList(allUsers);
-        setToUser(allUsers[0]);
+        //setToUser(allUsers[0]);
     }, [allUsers])
 
     useEffect(() => {
@@ -70,12 +69,10 @@ function ShowEventDetails() {
     }, [eventDetail]);
 
     useEffect(() => {
-        setLoginData(logIn);
-        if (logIn) {
-          dispatch(getTotalPurchased(id, logIn.logInId));
-          dispatch(getAllUsers(logIn.logInId));
-        }
-    }, [logIn]);
+        dispatch(getTotalPurchased(id, loginid));
+        dispatch(getAllUsers(loginid));
+        
+    }, [loginid]);
 
     useEffect(() => {
         setTotalTickets(totalPurchased);
@@ -85,7 +82,7 @@ function ShowEventDetails() {
 
     const onPurchaseButtonClick = () => {
         const newtickets = {
-            userId: loginData.logInId,
+            userId: loginid,
             eventId: parseInt(id),
             count: parseInt(tickets)
           }
@@ -94,11 +91,11 @@ function ShowEventDetails() {
 
     const onTransfer = (e) => {
         const newtickets = {
-            userId: loginData.logInId,
+            userId: loginid,
             eventId: parseInt(id),
             count: parseInt(transfer),
           }
-          dispatch(transferTicket(id, loginData.logInId, toUser, newtickets));
+          dispatch(transferTicket(id, loginid, toUser, newtickets));
     }
     
     return (
@@ -189,12 +186,12 @@ function ShowEventDetails() {
                             </div>
                             <h2 style={{textDecoration: 'underline'}}>Modify the Event</h2>
                             <div style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}>
-                                <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
+                                <Button variant="contained" disabled={((eventData) ? !(loginid === eventData.ownerId) : true)}
                                     onClick={() => { history.push('/EditEvent') }}
                                 >
                                     EDIT
                                 </Button>
-                                <Button variant="contained" disabled={((loginData && eventData) ? !(loginData.logInId === eventData.ownerId) : true)}
+                                <Button variant="contained" disabled={(( eventData) ? !(loginid === eventData.ownerId) : true)}
                                     onClick={() => { dispatch(deleteEvent(parseInt(id), history)) }}
                                 >
                                     DELETE

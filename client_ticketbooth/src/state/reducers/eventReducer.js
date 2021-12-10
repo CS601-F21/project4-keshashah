@@ -12,9 +12,7 @@ import {
    events: [],
    userEvents: [],
    eventbyid: {},
-   login: {
-     logInId: 1,
-   },
+   loginid: {},
    totalPurchased: 0,
    profile: {},
    allUsers: []
@@ -45,7 +43,7 @@ import {
       case GET_PROFILE:
         return {
           ...state,
-          profile: action.payload
+          loginid: action.payload
         }
       case GET_ALL_USERS:
         return {

@@ -140,6 +140,29 @@ export const getAllEvents = () => async (dispatch) => {
       });
   };
 
+  // axios.get(`${server}/`, {
+  //   headers: {
+  //     'Access-Control-Allow-Origin': 'http://localhost:8080'
+  //   }
+  // })
+
+  //,{withCredentials: true}
+  export const loginUser = (history) => async (dispatch) => {
+    axios.get(`${server}/`)
+      .then((response) => {
+        dispatch({
+          type: GET_PROFILE,
+          payload: response.data
+        })
+        history.push('/AllEvents');
+        return true;
+      })
+      .catch((err) => {
+        alert(err);
+        return false;
+      });
+  };
+
   export const getUserProfileData = (userId) => async (dispatch) => {
     axios.get(`${server}/api/user/${userId}`)
       .then((response) => {

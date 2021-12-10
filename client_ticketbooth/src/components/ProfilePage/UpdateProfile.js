@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 function UpdateProfile(props) {
   const classes = useStyles();
-  const logIn = useSelector((state) => state.event.login);
+  const loginid = useSelector((state) => state.event.loginid);
   const eventDetails = useSelector((state) => state.event.userEvents);
   const profileDetails = useSelector((state) => state.event.profile);
     const [rows, setRows] = useState([]);
@@ -37,9 +37,9 @@ function UpdateProfile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllEventsForUser(logIn.logInId));
-        dispatch(getUserProfileData(logIn.logInId));
-    }, [logIn])
+        dispatch(getAllEventsForUser(loginid));
+        dispatch(getUserProfileData(loginid));
+    }, [loginid])
 
     useEffect(() => {
        console.log(profileDetails);
@@ -83,11 +83,11 @@ function UpdateProfile(props) {
            alert("Eligibility 14 years ONLY.")
             return false;
         }
-        if (dtCurrent.getFullYear() - dtDOB.getFullYear() == 14) {
+        if (dtCurrent.getFullYear() - dtDOB.getFullYear() === 14) {
             if (dtCurrent.getMonth() < dtDOB.getMonth()) {
                 return false;
             }
-            if (dtCurrent.getMonth() == dtDOB.getMonth()) {
+            if (dtCurrent.getMonth() === dtDOB.getMonth()) {
                 if (dtCurrent.getDate() < dtDOB.getDate()) {
                     return false;
                 }
@@ -124,7 +124,7 @@ function UpdateProfile(props) {
       country,
       };
       if(ValidateDOB(dob)) {
-            dispatch(updateProfile(userProfile, logIn.logInId));
+            dispatch(updateProfile(userProfile, loginid));
         }
     };
 

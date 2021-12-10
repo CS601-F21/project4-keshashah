@@ -68,8 +68,6 @@ const menuItems = [
 
 const Appbar = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const location = useLocation();
   const classes = useStyles();
 
   const [state, setState] = useState({
