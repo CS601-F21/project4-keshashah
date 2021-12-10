@@ -60,7 +60,7 @@ function ShowEventDetails() {
 
     useEffect(() => {
         setAllUsersList(allUsers);
-        //setToUser(allUsers[0]);
+        setToUser(allUsers[0]);
     }, [allUsers])
 
     useEffect(() => {
@@ -166,7 +166,7 @@ function ShowEventDetails() {
                                 style={{marginRight: '20px'}}
                                 fullWidth
                                 required
-                                value={allUsersList}
+                                value={toUser}
                                 onChange={(e) => {
                                     setToUser(e.target.value)
                                 }}

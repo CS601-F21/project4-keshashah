@@ -8,7 +8,8 @@ import {
   TOTAL_PURCHASED,
   GET_ALL_EVENTS_BY_USER,
   GET_PROFILE,
-  GET_ALL_USERS
+  GET_ALL_USERS,
+  LOGIN_USER
  // import action types from here
 } from './types';
 
@@ -148,10 +149,10 @@ export const getAllEvents = () => async (dispatch) => {
 
   //,{withCredentials: true}
   export const loginUser = (history) => async (dispatch) => {
-    axios.get(`${server}/`)
+    axios.get(`${server}/login`)
       .then((response) => {
         dispatch({
-          type: GET_PROFILE,
+          type: LOGIN_USER,
           payload: response.data
         })
         history.push('/AllEvents');

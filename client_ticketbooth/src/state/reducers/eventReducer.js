@@ -4,7 +4,8 @@ import {
     TOTAL_PURCHASED,
     GET_PROFILE,
     GET_ALL_USERS,
-    GET_ALL_EVENTS_BY_USER
+    GET_ALL_EVENTS_BY_USER,
+    LOGIN_USER
   } from '../action-creators/types';
   
   const initialState = {  
@@ -41,6 +42,11 @@ import {
         userEvents: action.payload
       }
       case GET_PROFILE:
+        return {
+          ...state,
+          profile: action.payload
+        }
+      case LOGIN_USER:
         return {
           ...state,
           loginid: action.payload
