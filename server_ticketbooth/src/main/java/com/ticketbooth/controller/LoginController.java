@@ -13,12 +13,13 @@ import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping(path = "api/login")
 public class LoginController {
 
     @Autowired
     LoginDAO loginDAO;
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public int loginUser(Principal p) {
         System.out.println(p);
         if(p!=null) {

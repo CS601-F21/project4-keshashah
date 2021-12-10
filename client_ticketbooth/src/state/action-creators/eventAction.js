@@ -149,7 +149,7 @@ export const getAllEvents = () => async (dispatch) => {
 
   //,{withCredentials: true}
   export const loginUser = (history) => async (dispatch) => {
-    axios.get(`${server}/login`)
+    axios.get(`${server}/api/login`)
       .then((response) => {
         dispatch({
           type: LOGIN_USER,
