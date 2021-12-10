@@ -1,16 +1,14 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import GoogleLogo from '../../images/google.svg';
 import logo from '../../images/ticket2.svg';
 import {
   Grid,
-  Avatar,
-  Button,
+  Avatar
 } from '@material-ui/core';
 import './../style.css';
-import {loginUser} from '../../state/action-creators/eventAction.js';
+import LoginHooks from './LoginHooks.js';
+
+// https://sivanesh-s.github.io/react-google-authentication/
 
 // CSS styles
 const useStyles = makeStyles((theme) => ({
@@ -25,44 +23,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const Login = () => {
   const classes = useStyles();
 
-  const history = useHistory();
-  
-  const dispatch = useDispatch();
-
-  const onLoginButtonClick = () => {
-    dispatch(loginUser(history));
-   // history.push('/AllEvents');
-  };
-
-  
   return (
     <div>
         <div className="login">
           
-           
             <Grid className={classes.wrapper}>
             
             <h1>Easy SignIn/SignUp: </h1>
 
-            <Button
-                  variant="outlined"
-                  fullWidth
-                  startIcon={(
-                    <img
-                      src={GoogleLogo}
-                      width="20px"
-                      style={{ position: 'absolute', left: 10, top: 7 }}
-                      alt="Google Logo"
-                    />
-                  )}
-                  onClick={(e) => { onLoginButtonClick(e); }}
-             >
-                  Sign in with Google
-                </Button>
+            
+                <LoginHooks/>
                
                 <br/>      <br/>      <br/>      <br/>
                       

@@ -26,14 +26,20 @@ import java.util.Arrays;
 
 
 @EnableWebSecurity
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable();
+
+//        http.antMatcher("/**")
+//                .authorizeRequests()
+//                .anyRequest().authenticated().and()
+//                .oauth2Login();
     }
 
-    @Bean
+  /*  @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
@@ -43,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 
 }
 

@@ -22,6 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../images/ticket.svg';
+import LogoutHooks from '../LandingPage/LogoutHooks';
 
  const useStyles = makeStyles(theme=>({
   menuSliderContainer: {
@@ -59,11 +60,11 @@ const menuItems = [
       listText: 'Profile',
       listPath: '/Profile'
   },
-  {
-      listIcon: <LogoutIcon />,
-      listText: 'Logout',
-      listPath: '/'
-  },
+  // {
+  //     listIcon: <LogoutIcon />,
+  //     listText: 'Logout',
+  //     listPath: '/'
+  // },
 ]
 
 const Appbar = () => {
@@ -108,24 +109,31 @@ const Appbar = () => {
             onClick={toggleSlider('left', true)}
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
+            <img  width='100' height='80' alt='' src={logo} style={{alignSelf: 'flex-end'}} />
           </IconButton>
           <MobileeRightMenuSlider open={state.left}
                 onClose={toggleSlider('left', false)}
                 anchor='left'>
                 {sideList('left')}
           </MobileeRightMenuSlider>
+         
           <Typography
             variant="h6"
             noWrap
             component="div"
             align="center"
+            width="50px"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             My TicketBooth Application
+            
           </Typography>
-          <img style={{cursor: 'pointer'}} width='120' height='80' alt='' src={logo} onClick={() => {history.push('/');}}/>
+          
+          <LogoutHooks />
+          
         </Toolbar>
+        
       </AppBar>
     </Box>
   );

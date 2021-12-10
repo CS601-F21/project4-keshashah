@@ -108,7 +108,7 @@ function UpdateProfile(props) {
     setDOB(event.target.value);
   };
   const handleOnChangeGender = (event) => {
-    setGender(event.target.value);
+    setGender(event);
   };
 
   const handleOnChangeCountry = (event) => {
@@ -181,7 +181,7 @@ function UpdateProfile(props) {
                     defaultValue="female"
                     value={gender}
                     style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}
-                    onChange={(e) => {handleOnChangeGender(e)}}
+                    onChange={(e) => {handleOnChangeGender(e.target.value)}}
                     name="radio-buttons-group"
                 >
                     <FormControlLabel value={0} control={<Radio />} label="Male" />

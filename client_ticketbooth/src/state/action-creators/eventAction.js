@@ -148,8 +148,8 @@ export const getAllEvents = () => async (dispatch) => {
   // })
 
   //,{withCredentials: true}
-  export const loginUser = (history) => async (dispatch) => {
-    axios.get(`${server}/api/login`)
+  export const loginUser = (name, email, history) => async (dispatch) => {
+    axios.get(`${server}/api/login/${name}/${email}`)
       .then((response) => {
         dispatch({
           type: LOGIN_USER,
