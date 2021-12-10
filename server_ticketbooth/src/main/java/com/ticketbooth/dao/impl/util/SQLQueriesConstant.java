@@ -10,9 +10,11 @@ public class SQLQueriesConstant {
     public static String getAllUserEmails = "SELECT email FROM user WHERE userID <> ?";
     public static String deleteEvent = "UPDATE event SET isActive = 0 WHERE eventId=? ";
     public static String updateUser = "UPDATE user SET name=?, gender=?, dob=?, country=? WHERE userId=?";
-    public static String getUserByID = "SELECT userId, name, email, gender, dob, country FROM user WHERE userId=?";
+    public static String getUserByID = "SELECT userId, name, email, COALESCE(gender,'') as gender, COALESCE(dob,'') as dob, COALESCE(country,'') as country FROM user WHERE userId=?";
     public static String showEventsForUser = showEventsBase + " AND ticket.userId=? GROUP BY event.eventID";
     public static String getUserIdFromEmail = "SELECT userId FROM user WHERE email = ? ";
     public static String searchEvents = showEventsBase + " AND (LOWER(name) LIKE ? OR LOWER(description) LIKE ? ) GROUP BY event.eventID" ;
     public static String updateEvent= "UPDATE event SET name=?, description=?, startTime=?, endTime=? WHERE eventId=?";
+    public static String getUserId = "SELECT COALESCE(userId,0) as userId FROM user WHERE email=?";
+    public static String addUser = "INSERT INTO user(name, email) VALUES(?,?)";
 }
